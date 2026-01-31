@@ -1,0 +1,38 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Step 1: Read Excel file
+df = pd.read_excel("sales_data.xlsx")
+
+# Step 2: Show data
+print("\nSales Data:\n")
+print(df)
+
+# Step 3: Total Sales column
+df["Total_Sales"] = df["Sales"]
+
+# Step 4: Total Revenue
+total_revenue = df["Total_Sales"].sum()
+print("\nTotal Revenue:", total_revenue)
+
+# Step 5: Product-wise Sales
+product_sales = df.groupby("Product")["Total_Sales"].sum()
+print("\nProduct-wise Sales:\n")
+print(product_sales)
+
+# Step 6: Region-wise Sales
+region_sales = df.groupby("Region")["Total_Sales"].sum()
+print("\nRegion-wise Sales:\n")
+print(region_sales)
+
+# Step 7: Product-wise Bar Chart
+product_sales.plot(kind="bar", title="Product-wise Sales")
+plt.xlabel("Product")
+plt.ylabel("Sales")
+plt.show()
+
+# Step 8: Region-wise Line Chart
+region_sales.plot(kind="line", marker="o", title="Region-wise Sales")
+plt.xlabel("Region")
+plt.ylabel("Sales")
+plt.show()
